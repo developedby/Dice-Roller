@@ -1,24 +1,18 @@
 import random
 import sys
 
-def diceroller(dicelist):
-    diceResults = []
+def diceroller(dice):
+    dice = dice.split('d')
+    diceNumber = int(dice[0])
+    diceSides = int(dice[1])
+
     diceRolls = []
-    dicelist = dicelist.split()
-    for i, dicecall in enumerate(dicelist):
-        diceNumber = 0
-        diceSides = 0
-        diceSum = 0
-        dicelist[i] = dicelist[i].split('d')
-        diceNumber = int(dicelist[i][0])
-        diceSides = int(dicelist[i][1])
-        for number in range(diceNumber):
-            result = random.randint(1, diceSides)
-            diceSum += result
-            diceRolls.append(str(result))
-        diceResults.append(str(diceSum)) 
-    return ' '.join(diceResults) + ":  " + ' '.join(diceRolls)
+    diceSum = 0
+    for number in range(diceNumber):
+        result = random.randint(1, diceSides)
+        diceSum += result
+        diceRolls.append(str(result))
+    return f"{diceSum}: {' '.join(diceRolls)}"
 
 for arg in sys.argv[1:]:
     print(diceroller(arg))
-    
